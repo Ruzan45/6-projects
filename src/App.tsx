@@ -1,30 +1,19 @@
-import React from 'react'
+import React from 'react';
 import './index.scss';
 
-
 function App() {
-  const data: string | null = window.localStorage.getItem('count');
-  let num: number = data ? Number(data) : 0;
-  const [count, setCount] = React.useState<number>(num)
-
-  React.useEffect(() => {
-    window.localStorage.setItem('count', String(count))
-  }, [count])
-
-  const countPlus = () => {
-    setCount(count + 1)
-  }
-  const countMinus = () => {
-    count !== 0 && setCount(count - 1)
-  }
   return (
     <div className="App">
-      <div>
-        <h2>Счетчик:</h2>
-        <h1>{count}</h1>
-        <button onClick={countMinus} className="minus">- Минус</button>
-        <button onClick={countPlus} className="plus">Плюс +</button>
-      </div>
+      <button className="open-modal-btn">✨ Открыть окно</button>
+      {/* <div className="overlay">
+        <div className="modal">
+          <svg height="200" viewBox="0 0 200 200" width="200">
+            <title />
+            <path d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z" />
+          </svg>
+          <img src="https://media2.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif" />
+        </div>
+      </div> */}
     </div>
   );
 }
