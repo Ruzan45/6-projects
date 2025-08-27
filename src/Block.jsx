@@ -21,7 +21,7 @@ export const Block = ({ value, currency, onChangeValue, onChangeCurrency }) => (
       </li>
     </ul>
     <input
-      onChange={(e) => onChangeValue(e.target.value)}
+      onChange={(e) => onChangeValue(e.target.value)} //контроллируемый инпут
       value={value}
       type="number"
       placeholder={0}
