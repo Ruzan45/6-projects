@@ -1,81 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import { Block } from './Block';
+import React from 'react';
 import './index.scss';
 
-const course = {
-  "base": "USD",
-  "date": "2025-08-25",
-  "rates": {
-    "EUR": 1.1595,
-    "USD": 1,
-    "CNY": 0.1386,
-    "GBP": 1.2908,
-    "CHF": 1.0954,
-    "JPY": 0.0072,
-    "AUD": 0.6961,
-    "CAD": 0.7597,
-    "SEK": 0.1019,
-    "NOK": 0.1061,
-    "DKK": 0.1391,
-    "PLN": 0.2258,
-    "CZK": 0.0428,
-    "UAH": 0.0263,
-    "KZT": 0.0023,
-    "BYR": 0.3869,
-    "AZN": 0.5725,
-    "AMD": 0.0021,
-    "GEL": 0.3042,
-    "UZS": 0.0001,
-    "RUB": 80.8001
-  }
+function Collection({ name, images }) {
+  return (
+    <div className="collection">
+      <img className="collection__big" src={images[0]} alt="Item" />
+      <div className="collection__bottom">
+        <img className="collection__mini" src={images[1]} alt="Item" />
+        <img className="collection__mini" src={images[2]} alt="Item" />
+        <img className="collection__mini" src={images[3]} alt="Item" />
+      </div>
+      <h4>{name}</h4>
+    </div>
+  );
 }
 
-
-
-
 function App() {
-  const [rates, setRates] = React.useState(course.rates)
-  /* React.useEffect(() => {
-    fetch('https://cdn.cer.su//api/latest.json').then((res)=>res.json()).then((json)=>{
-      setRates(json.rates);
-      console.log(json.rates);
-    }).catch((err)=>{
-      console.warn(err);
-      alert('Не удалось получить инфу');
-    });
-  }, []); */
-
-  const [fromCur, setFromCur] = useState('RUB')
-  const [toCur, setToCur] = useState('USD')
-  const [fromPrise, setFromPrise] = useState(0)
-  const [toPrise, setToPrise] = useState(0)
-  const onChangeFromPrice = (val) => {
-    setFromPrise(val)
-
-    const price = val / rates[fromCur];
-    const result = price * rates[toCur]
-
-    setToPrise(result)
-  }
-  const onChangeToPrice = (val) => {
-    const price = val / rates[toCur];
-    const result = price * rates[fromCur]
-    setFromPrise(result)
-    setToPrise(val)
-  }
-  useEffect(() => {
-    onChangeFromPrice(fromPrise)
-  }, [fromCur])
-  useEffect(() => {
-    onChangeToPrice(toPrise)
-  }, [toCur])
-
-
-
   return (
     <div className="App">
-      <Block value={fromPrise} currency={fromCur} onChangeCurrency={setFromCur} onChangeValue={onChangeFromPrice} />
-      <Block value={toPrise} currency={toCur} onChangeCurrency={setToCur} onChangeValue={onChangeToPrice} />
+      <h1>Моя коллекция фотографий</h1>
+      <div className="top">
+        <ul className="tags">
+          <li className="active">Все</li>
+          <li>Горы</li>
+          <li>Море</li>
+          <li>Архитектура</li>
+          <li>Города</li>
+        </ul>
+        <input className="search-input" placeholder="Поиск по названию" />
+      </div>
+      <div className="content">
+        <Collection
+          name="Путешествие по миру"
+          images={[
+            'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            'https://images.unsplash.com/photo-1560840067-ddcaeb7831d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            'https://images.unsplash.com/photo-1531219572328-a0171b4448a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+            'https://images.unsplash.com/photo-1573108724029-4c46571d6490?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+          ]}
+        />
+      </div>
+      <ul className="pagination">
+        <li>1</li>
+        <li className="active">2</li>
+        <li>3</li>
+      </ul>
     </div>
   );
 }
